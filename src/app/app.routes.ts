@@ -26,6 +26,10 @@ const routes = [
         path: '/jobtitle',
         component: lazy(() => import('../pages/job-title'))
     },
+    {
+        path: '/respondent',
+        component: lazy(() => import('../pages/respondent'))
+    },
 ]
 
 export default routes

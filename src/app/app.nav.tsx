@@ -1,5 +1,5 @@
 import CIcon from '@coreui/icons-react'
-import { cilHome, cilUser, } from '@coreui/icons'
+import { cilHome, cilFingerprint, cilEducation, cilBriefcase, cilSitemap, cilVoiceOverRecord } from '@coreui/icons'
 import { CNavItem, CNavTitle } from '@coreui/react'
 
 
@@ -15,26 +15,32 @@ export const _navDefault = [
 export const _navMasterData = [
   {
     component: CNavTitle,
-    name: 'Master Data',
+    name: 'Manajemen Responden',
   },
   {
     component: CNavItem,
     name: 'Jenis Pendidikan',
     to: '/education',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilEducation} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Status Pekerjaan',
     to: '/jobstatus',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBriefcase} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Jabatan Pekerjaan',
     to: '/jobtitle',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilSitemap} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Responden',
+    to: '/respondent',
+    icon: <CIcon icon={cilVoiceOverRecord} customClassName="nav-icon" />,
+  }
 ]
 
 export const _navUser = [
@@ -44,8 +50,8 @@ export const _navUser = [
   },
   {
     component: CNavItem,
-    name: 'Kelola Pengguna',
+    name: 'Pengguna',
     to: '/user',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilFingerprint} customClassName="nav-icon" />,
   }
 ]
