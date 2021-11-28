@@ -8,13 +8,23 @@ const routes = [
     },
     { 
         path: '/dashboard', 
-        name: 'Dashboard', 
         component: lazy(() => import('../pages/dashboard'))
     },
     {
         path: '/user',
-        name: 'User',
         component: lazy(() => import('../pages/user'))
+    },
+    {
+        path: '/education',
+        component: lazy(() => import('../pages/education'))
+    },
+    {
+        path: '/jobstatus',
+        component: lazy(() => import('../pages/job-status'))
+    },
+    {
+        path: '/jobtitle',
+        component: lazy(() => import('../pages/job-title'))
     },
 ]
 

@@ -12,14 +12,22 @@ import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
 import * as navigation from '../app/app.nav'
+import { useAuthStore } from '../stores'
 
 const AppSidebar = () => {
     const dispatch = useDispatch()
+    const auth = useAuthStore()
     const unfoldable = useSelector((state: any) => state.sidebarUnfoldable)
     const sidebarShow = useSelector((state: any) => state.sidebarShow)
 
 
-    let nav = navigation._navDefault
+    let nav: any = navigation._navDefault
+    if (auth?.user?.role === 'admin') {
+        nav = [...nav, ...navigation._navMasterData]
+    }
+    if (auth?.user?.role === 'superadmin') {
+        nav = [...nav, ...navigation._navMasterData, ...navigation._navUser]
+    }
 
     return (
         <CSidebar
