@@ -1,11 +1,11 @@
-import { cilPlus, cilPencil } from "@coreui/icons";
+import { cilPlus, cilPencil, cilLockUnlocked } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { CRow, CCol, CBadge, CCard, CCardBody, CSpinner, CTooltip, CButton, CModal, CModalBody, CModalFooter, CModalHeader, CFormLabel, CFormInput, CFormSelect } from "@coreui/react"
 import { useEffect, useState } from "react";
 import { userService } from "../../services";
 import { IUser } from "../../services/user";
 import { toastUtil } from "../../utils";
-import { capitalize } from "../../utils/common.util";
+import { capitalize, strToBool } from "../../utils/common.util";
 import Pagination from 'react-js-pagination'
 
 const Index = () => {
@@ -19,6 +19,9 @@ const Index = () => {
     const [update, setUpdate] = useState(false)
     const [modal, setModal] = useState(false);
     const [obj, setObj] = useState<any>(null);
+    const [modalRpw, setModalRpw] = useState(false)
+    const [newPass, setNewPass] = useState('')
+    const [confNewPass, setConfNewPass] = useState('')
 
     useEffect(() => {
         const fetch = async () => {
@@ -51,6 +54,61 @@ const Index = () => {
         } else {
             setModal(false)
         }
+    }
+
+    const toggleRpw = (obj?: any) => {
+        if (!modal) {
+            setModalRpw(true)
+            if (obj) {
+                setObj(obj)
+            } else {
+                setObj(null)
+            }
+        } else {
+            setModalRpw(false)
+        }
+    }
+
+    const save = async (val: any) => {
+        if (!val) return toastUtil.useAlert('Form tidak boleh ada yang kosong!')
+        const { username, password, fullname, role, is_active } = val
+        try {   
+            if (!val.id) { 
+                await userService.createUser({ username, password, fullname, role, is_active: strToBool(is_active) })
+                toastUtil.useAlert('Tambah Data berhasil', 'success')
+                setModal(false)
+                setUpdate(true)
+            } else {
+                await userService.updateUser({ user_id: val.id, username, password, fullname, role, is_active: strToBool(is_active) })
+                toastUtil.useAlert('Ubah Data berhasil', 'success')
+                setModal(false)
+                setUpdate(true)
+            }
+        } catch (error: any) {
+            toastUtil.useAlert(error.message)
+        }
+    }
+
+    const handleRpw = async (value: any) => {
+        const { id } = value
+        try {
+            if (newPass === '') {
+                return toastUtil.useAlert('Password  harus diisi')
+            }
+            if (confNewPass === '') {
+                return toastUtil.useAlert('Konfirmasi Password  harus diisi')
+            }
+            if (newPass !== confNewPass) {
+                return toastUtil.useAlert('Password dan Konfirmasi Password tidak sama')
+            }
+            await userService.resetPassUser({ user_id: id, password: newPass })
+            toastUtil.useAlert('Reset Password berhasil', 'success')
+            setModalRpw(false)
+            setUpdate(true)
+        } catch (error: any) {
+            toastUtil.useAlert(error.message)
+        }
+
     }
 
     let no = (page - 1) * limit + 1;
@@ -89,6 +147,9 @@ const Index = () => {
                                                         <CTooltip placement="top" content="Ubah">
                                                             <button className="d-inline btn btn-sm btn-info text-white text-nowrap ms-1" onClick={() => toggle(el)}><CIcon icon={cilPencil} /></button>
                                                         </CTooltip>
+                                                        <CTooltip placement="top" content="Ganti Password">
+                                                            <button className="d-inline btn btn-sm btn-warning text-white ms-1 text-nowrap" onClick={() => toggleRpw(el)}><CIcon icon={cilLockUnlocked} /></button>
+                                                        </CTooltip>
                                                     </td>
                                                 </tr>
                                             );
@@ -118,7 +179,7 @@ const Index = () => {
                 <CModalBody>
                     <div className="mb-3">
                         <CFormLabel htmlFor="username">Username <span className="text-danger">*</span></CFormLabel>
-                        <CFormInput type="text" id="username" placeholder="Cth: jhon" onChange={(e) => setObj({ ...obj, username: e.target.value })} value={obj?.username} />
+                        <CFormInput type="text" id="username" placeholder="Cth: jhon" onChange={(e) => setObj({ ...obj, username: e.target.value })} value={obj?.username || ''} />
                     </div>
                     {!obj?.id && <div className="mb-3">
                         <CFormLabel htmlFor="password">Password <span className="text-danger">*</span></CFormLabel>
@@ -128,13 +189,12 @@ const Index = () => {
                     </div>}
                     <div className="mb-3">
                         <CFormLabel htmlFor="fullname">Nama Lengkap <span className="text-danger">*</span></CFormLabel>
-                        <CFormInput type="text" id="fullname" placeholder="Cth: Jhon Doe" onChange={(e) => setObj({ ...obj, fullname: e.target.value })} value={obj?.fullname} />
+                        <CFormInput type="text" id="fullname" placeholder="Cth: Jhon Doe" onChange={(e) => setObj({ ...obj, fullname: e.target.value })} value={obj?.fullname || ''} />
                     </div>
                     <div className="mb-3">
                         <CFormLabel htmlFor="">Role <span className="text-danger">*</span></CFormLabel>
                         <CFormSelect onChange={e => setObj({ ...obj, role: e.target.value })} value={obj?.role || ''}>
                             <option value="admin">Admin</option>
-                            <option value="officer">Officer</option>
                             <option value="superadmin">Super Admin</option>
                         </CFormSelect>
                     </div>
@@ -148,7 +208,25 @@ const Index = () => {
                 </CModalBody>
                 <CModalFooter>
                     <CButton color="secondary" className="text-white" onClick={() => setModal(false)}>Batal</CButton>
-                    <CButton color="success" className="text-white">Simpan</CButton>
+                    <CButton color="success" className="text-white" onClick={() => save(obj)}>Simpan</CButton>
+                </CModalFooter>
+            </CModal>
+
+            <CModal visible={modalRpw} onClose={() => setModalRpw(false)}>
+                <CModalHeader closeButton><h5>Reset Password</h5></CModalHeader>
+                <CModalBody>
+                    <div className="mb-3">
+                        <CFormLabel htmlFor="rpass">Password Baru <span className="text-danger">*</span></CFormLabel>
+                        <CFormInput type="password" id="rpass" onChange={(e) => setNewPass(e.target.value)} autoComplete="off" />
+                    </div>
+                    <div className="mb-3">
+                        <CFormLabel htmlFor="cpass">Konfirmasi Password Baru <span className="text-danger">*</span></CFormLabel>
+                        <CFormInput type="password" id="cpass" onChange={(e) => setConfNewPass(e.target.value)} autoComplete="off" />
+                    </div>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="secondary" className="text-white" onClick={() => setModalRpw(false)}>Batal</CButton>
+                    <CButton color="danger" className="text-white" onClick={() => handleRpw(obj)}>Proses</CButton>
                 </CModalFooter>
             </CModal>
         </>
