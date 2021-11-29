@@ -15,6 +15,22 @@ export const _navDefault = [
 export const _navMasterData = [
   {
     component: CNavTitle,
+    name: 'Manajemen Kuesioner',
+  },
+  {
+    component: CNavItem,
+    name: 'Unsur Pelayanan',
+    to: '/question-category',
+    icon: <CIcon icon={cilEducation} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Pertanyaan',
+    to: '/question',
+    icon: <CIcon icon={cilEducation} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
     name: 'Manajemen Responden',
   },
   {
