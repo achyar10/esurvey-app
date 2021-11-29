@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  esurvey-app:
+    container_name: esurvey-app
+    image: "esurvey-app:latest"
+    restart: always
+    environment:
+      REACT_APP_API_URL: "https://esurvey.achyar.my.id/"
+    ports:
+      - "7003:7003"
