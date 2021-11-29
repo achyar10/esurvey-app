@@ -2,44 +2,44 @@ import { lazy } from 'react'
 
 const routes = [
     { 
-        path: '/', 
+        path: '/admin', 
         exact: true, 
         name: 'Home' 
     },
     { 
-        path: '/dashboard', 
+        path: '/admin/dashboard', 
         component: lazy(() => import('../pages/dashboard'))
     },
     {
-        path: '/user',
+        path: '/admin/user',
         component: lazy(() => import('../pages/user'))
     },
     {
-        path: '/education',
+        path: '/admin/education',
         component: lazy(() => import('../pages/education'))
     },
     {
-        path: '/jobstatus',
+        path: '/admin/jobstatus',
         component: lazy(() => import('../pages/job-status'))
     },
     {
-        path: '/jobtitle',
+        path: '/admin/jobtitle',
         component: lazy(() => import('../pages/job-title'))
     },
     {
-        path: '/respondent',
+        path: '/admin/respondent',
         component: lazy(() => import('../pages/respondent'))
     },
     {
-        path: '/question-category',
+        path: '/admin/question-category',
         component: lazy(() => import('../pages/question-category'))
     },
     {
-        path: '/question',
+        path: '/admin/question',
         component: lazy(() => import('../pages/question'))
     },
     {
-        path: '/questionnaire',
+        path: '/admin/questionnaire',
         component: lazy(() => import('../pages/questionnaire'))
     },
 ]

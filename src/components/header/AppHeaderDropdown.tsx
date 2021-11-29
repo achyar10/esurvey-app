@@ -21,7 +21,7 @@ const AppHeaderDropdown = () => {
     const handleLogout = () => {
         localStorage.removeItem('auth')
         auth.unsetUser()
-        return (<Redirect to="/login" />)
+        return (<Redirect to="/auth/login" />)
     }
 
     return (
