@@ -62,7 +62,7 @@ const Login = (props: any) => {
                            <CForm onSubmit={handleSubmit}>
                               <div className="text-center">
                                  <img src={Logo} height={'50'} alt="logo" />
-                                 <span className="text-dark">React Starter App</span>
+                                 <span className="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;K E M E N D E S A</span>
                               </div>
                               <h3>Sign In</h3>
                               <p className="text-medium-emphasis">Your account</p>

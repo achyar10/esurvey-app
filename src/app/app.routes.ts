@@ -38,6 +38,10 @@ const routes = [
         path: '/question',
         component: lazy(() => import('../pages/question'))
     },
+    {
+        path: '/questionnaire',
+        component: lazy(() => import('../pages/questionnaire'))
+    },
 ]
 
 export default routes

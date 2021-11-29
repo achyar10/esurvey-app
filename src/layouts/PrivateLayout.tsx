@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
-import { localStorageUtil } from "../utils";
+import { localStorageUtil, toastUtil } from "../utils";
 import jwtDecode from "jwt-decode";
 import moment from "moment";
 import { useAuthStore } from "../stores";
@@ -31,12 +31,13 @@ const PrivateLayout = (props: any) => {
             const decoded: IPayload = jwtDecode(token);
             const exp = moment.unix(decoded.exp)
             if (moment().isBefore(exp)) return true;
+            toastUtil.useAlert('Sesi berakhir, silakan login ulang!')
             localStorageUtil.remove('auth')
             return false
         }
         return false
     }
-    
+
     if (auth.user === null) {
         localStorageUtil.remove('auth')
     }

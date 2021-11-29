@@ -27,7 +27,7 @@ const AppHeader = () => {
                     <CIcon icon={cilMenu} size="lg" />
                 </CHeaderToggler>
                 <CHeaderBrand className="mx-auto d-md-none">
-                    <img src={logo} height={50} alt="logo" /> <span className="text-dark">React Starter App</span>
+                    <img src={logo} height={50} alt="logo" /> <span className="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;K E M E N D E S A</span>
                 </CHeaderBrand>
                 <CHeaderNav className="d-none d-md-flex me-auto"></CHeaderNav>
                 <CHeaderNav></CHeaderNav>

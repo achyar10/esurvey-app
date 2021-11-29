@@ -1,5 +1,8 @@
 import CIcon from '@coreui/icons-react'
-import { cilHome, cilFingerprint, cilEducation, cilBriefcase, cilSitemap, cilVoiceOverRecord } from '@coreui/icons'
+import { 
+  cilHome, cilFingerprint, cilEducation, cilBriefcase, cilSitemap, cilVoiceOverRecord,
+  cilListRich, cilTask, cilList,
+ } from '@coreui/icons'
 import { CNavItem, CNavTitle } from '@coreui/react'
 
 
@@ -21,13 +24,19 @@ export const _navMasterData = [
     component: CNavItem,
     name: 'Unsur Pelayanan',
     to: '/question-category',
-    icon: <CIcon icon={cilEducation} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilList} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Pertanyaan',
     to: '/question',
-    icon: <CIcon icon={cilEducation} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilListRich} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Periode Kuesioner',
+    to: '/questionnaire',
+    icon: <CIcon icon={cilTask} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
