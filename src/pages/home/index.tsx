@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Header, Navbar } from '../../components/home'
 import { authService, questionnaireRespondentService, questionService } from '../../services';
 import { instance } from '../../services/instances';
@@ -15,10 +15,6 @@ export default function Index() {
     const [questions, setQuestions] = useState<IQuestion[]>([]);
     const [respondentId, setRespondentId] = useState<any>(null);
     const [token, setToken] = useState<any>(null);
-
-    useEffect(() => {
-
-    }, [])
 
     const getRespondent = async () => {
         if (nik === '') return toastUtil.useAlert('NIP/NIK tidak boleh kosong', 'error')
