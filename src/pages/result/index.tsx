@@ -2,14 +2,16 @@ import { CFormLabel, CFormSelect } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { Header, Navbar } from "../../components/home";
 import { resultService } from "../../services";
-import { IResult, IResultQuestionnaire } from "../../services/result";
+import { IChart, IResult, IResultQuestionnaire } from "../../services/result";
 import { toastUtil } from "../../utils";
+import { CChart } from '@coreui/react-chartjs';
 
 
 export default function Index() {
 
     const [questionnaires, setQuestionnaire] = useState<IResultQuestionnaire[]>([]);
     const [result, setResult] = useState<IResult | null>(null);
+    const [charts, setChart] = useState<IChart[]>([]);
     const [id, setId] = useState<number>(0);
 
     useEffect(() => {
@@ -17,8 +19,14 @@ export default function Index() {
             try {
                 const response = await resultService.getQuestionnaire();
                 setQuestionnaire(response.data)
+                let setDefault = id;
+                if (setDefault === 0) {
+                    setId(response.data[0].id || 0);
+                }
                 const response2 = await resultService.getResult(id);
                 setResult(response2.data)
+                const response3 = await resultService.getChart(id);
+                setChart(response3.data)
             } catch (error: any) {
                 toastUtil.useAlert(error.message)
             }
@@ -36,7 +44,7 @@ export default function Index() {
                     <div className="card-body">
                         <div className="mb-3">
                             <CFormLabel>Periode Kuesioner <span className="text-danger">*</span></CFormLabel>
-                            <CFormSelect onChange={(e) => setId(Number(e.target.value))}>
+                            <CFormSelect onChange={(e) => setId(Number(e.target.value))} value={id}>
                                 <option value="0">---Pilih Periode---</option>
                                 {questionnaires.map((el, i) => {
                                     return (
@@ -103,6 +111,55 @@ export default function Index() {
                                 </div>
                             </div>
                         </div>
+                        <hr />
+                        {/* Loop Chart */}
+                        {charts.map((el, i) => {
+                            return (
+                                <div className="card mt-3" key={i}>
+                                    <h6 className="card-header">Pertanyaan {i + 1}<br />{el.description}</h6>
+                                    <div className="card-body">
+                                        <div className="row">
+                                            <div className="col-md-3 col-sm-12">
+                                                <CChart
+                                                    type="pie"
+                                                    data={{
+                                                        labels: el.answers.map(el => el.answer_description),
+                                                        datasets: [
+                                                            {
+                                                                backgroundColor: ['#DD1B16', '#E46651', '#00D8FF', '#41B883'],
+                                                                data: el.answers.map(el => el.total),
+                                                            },
+                                                        ],
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="col-md-9 col-sm-12">
+                                                <div className="table-responsive">
+                                                    <table className="table table-striped">
+                                                        <thead className="bg-light">
+                                                            <tr>
+                                                                <th>Jawaban</th>
+                                                                <th>Jumlah responden</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {el.answers.map((el2, i2) => {
+                                                                return (
+                                                                    <tr key={i2}>
+                                                                        <td>{el2.answer_description}</td>
+                                                                        <td>{el2.total}</td>
+                                                                    </tr>
+                                                                )
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

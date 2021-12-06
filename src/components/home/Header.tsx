@@ -18,8 +18,8 @@ export const Header = () => {
                     </p>
                 </div>
             </div>
-            <Link className="btn btn-primary text-white" to="/">Form Survey</Link>
-            <Link className="btn btn-info text-white float-end" to="/result">Hasil</Link>
+            <Link className="btn btn-primary text-white" to="/survey">Form Survey</Link>
+            <Link className="btn btn-info text-white float-end" to="/">Hasil</Link>
             <hr />
         </>
     )

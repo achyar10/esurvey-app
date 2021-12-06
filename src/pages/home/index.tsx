@@ -45,6 +45,7 @@ export default function Index() {
         e.preventDefault();
         try {
             const suggestion = e.target.suggestion.value;
+            if (suggestion === '') return toastUtil.useAlert('Saran wajib di isi', 'error')
             const answers = []
             for (let i = 0; i < questions.length; i++) {
                 let choose = e.target[`answer_${i}`].value
@@ -169,8 +170,8 @@ export default function Index() {
                                 {/* Saran Kiritik */}
                                 <hr />
                                 <div className="form-group mb-3 mt-3">
-                                    <h5 className="card-title">Saran</h5>
-                                    <textarea name="suggestion" className="form-control" placeholder="Anda bisa melewatkan pertantanyaan ini" id=""></textarea>
+                                    <h5 className="card-title">Saran <span className="text-danger">*</span></h5>
+                                    <textarea name="suggestion" className="form-control" placeholder="Masukan saran anda" id=""></textarea>
                                 </div>
                             </div>
                         </div>
