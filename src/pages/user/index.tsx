@@ -4,7 +4,7 @@ import { CRow, CCol, CBadge, CCard, CCardBody, CSpinner, CTooltip, CButton, CMod
 import { useEffect, useState } from "react";
 import { userService } from "../../services";
 import { IUser } from "../../services/user";
-import { toastUtil } from "../../utils";
+import { dateUtil, toastUtil } from "../../utils";
 import { capitalize, strToBool } from "../../utils/common.util";
 import Pagination from 'react-js-pagination'
 
@@ -72,8 +72,8 @@ const Index = () => {
     const save = async (val: any) => {
         if (!val) return toastUtil.useAlert('Form tidak boleh ada yang kosong!')
         const { username, password, fullname, role, is_active } = val
-        try {   
-            if (!val.id) { 
+        try {
+            if (!val.id) {
                 await userService.createUser({ username, password, fullname, role, is_active: strToBool(is_active) })
                 toastUtil.useAlert('Tambah Data berhasil', 'success')
                 setModal(false)
@@ -130,6 +130,8 @@ const Index = () => {
                                             <th>Username</th>
                                             <th>Nama Lengkap</th>
                                             <th>Role</th>
+                                            <th>Tanggal Buat</th>
+                                            <th>Tanggal Ubah</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
@@ -142,6 +144,8 @@ const Index = () => {
                                                     <td>{el.username}</td>
                                                     <td>{el.fullname}</td>
                                                     <td>{capitalize(el.role)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.created_at)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.updated_at)}</td>
                                                     <td>{el.is_active ? (<CBadge color="success">Aktif</CBadge>) : (<CBadge color="danger">Tidak Aktif</CBadge>)}</td>
                                                     <td>
                                                         <CTooltip placement="top" content="Ubah">
@@ -205,6 +209,16 @@ const Index = () => {
                             <option value="0">Tidak Aktif</option>
                         </CFormSelect>
                     </div>
+                    {obj?.id && <div>
+                        <div className="mb-3">
+                            <CFormLabel>User Pembuat</CFormLabel>
+                            <CFormInput type="text" readOnly value={obj?.created_by || ''} />
+                        </div>
+                        <div className="mb-3">
+                            <CFormLabel>User Ubah</CFormLabel>
+                            <CFormInput type="text" readOnly value={obj?.updated_by || ''} />
+                        </div>
+                    </div>}
                 </CModalBody>
                 <CModalFooter>
                     <CButton color="secondary" className="text-white" onClick={() => setModal(false)}>Batal</CButton>

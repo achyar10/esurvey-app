@@ -31,6 +31,13 @@ export interface IChartAnswer {
     total: number;
 }
 
+export interface IDashboard {
+    total_respondent: number;
+    total_user: number;
+    total_questionnaire: number;
+    total_respondent_questionnaire: number;
+}
+
 export interface GetResultResponse extends BaseResponse {
     data: IResult;
 }
@@ -41,6 +48,10 @@ export interface GetResultQuestionnaireResponse extends BaseResponse {
 
 export interface GetResultChartResponse extends BaseResponse {
     data: IChart[];
+}
+
+export interface GetResultDashboardResponse extends BaseResponse {
+    data: IDashboard;
 }
 
 
@@ -60,5 +71,10 @@ export const getQuestionnaire = async (): Promise<GetResultQuestionnaireResponse
 
 export const getChart = async (id: number): Promise<GetResultChartResponse> => {
     const response = await instance.get(`${url}/chart/${id}`);
+    return response.data;
+};
+
+export const getDashboard = async (id: number): Promise<GetResultDashboardResponse> => {
+    const response = await instance.get(`${url}/dashboard/${id}`);
     return response.data;
 };

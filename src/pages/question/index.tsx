@@ -2,7 +2,7 @@ import { cilPlus, cilPencil } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { CRow, CCol, CCard, CCardBody, CSpinner, CTooltip, CButton, CModal, CModalBody, CModalFooter, CModalHeader, CFormLabel, CFormSelect, CFormTextarea, CBadge, CFormInput } from "@coreui/react"
 import { useEffect, useState } from "react";
-import { toastUtil } from "../../utils";
+import { dateUtil, toastUtil } from "../../utils";
 import Pagination from 'react-js-pagination'
 import { IQuestion } from "../../services/question";
 import { questionService, questionCategoryService } from "../../services";
@@ -111,6 +111,8 @@ const Index = () => {
                                             <th>No</th>
                                             <th>Unsur Pelayanan</th>
                                             <th>Pertanyaan</th>
+                                            <th>Tanggal Buat</th>
+                                            <th>Tanggal Ubah</th>
                                             <th>Keterangan</th>
                                             <th></th>
                                         </tr>
@@ -122,6 +124,8 @@ const Index = () => {
                                                     <td>{no++}</td>
                                                     <td>{el.question_category.name}</td>
                                                     <td>{el.description.slice(0, 50)}...</td>
+                                                    <td>{dateUtil.formatDateFull(el.created_at)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.updated_at)}</td>
                                                     <td>{el.is_active ? (<CBadge color="success">Aktif</CBadge>) : (<CBadge color="danger">Tidak Aktif</CBadge>)}</td>
                                                     <td>
                                                         <CTooltip placement="top" content="Ubah">

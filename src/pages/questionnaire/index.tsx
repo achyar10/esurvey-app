@@ -93,6 +93,8 @@ const Index = () => {
                                             <th>Keterangan</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Akhir</th>
+                                            <th>Tanggal Buat</th>
+                                            <th>Tanggal Ubah</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
@@ -106,6 +108,8 @@ const Index = () => {
                                                     <td>{el.description}</td>
                                                     <td>{dateUtil.formatDate(el.start_date)}</td>
                                                     <td>{dateUtil.formatDate(el.end_date)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.created_at)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.updated_at)}</td>
                                                     <td>{dateUtil.formatDateBetween(el.start_date, el.end_date) ? (<CBadge color="success">Aktif</CBadge>) : (<CBadge color="danger">Tidak Aktif</CBadge>)}</td>
                                                     <td>
                                                         <CTooltip placement="top" content="Ubah">

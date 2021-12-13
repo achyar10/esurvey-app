@@ -6,7 +6,7 @@ import { instance } from '../../services/instances';
 import { IQuestion } from '../../services/question';
 import { toastUtil } from '../../utils';
 
-export default function Index() {
+export default function Index(props: any) {
 
     const [nik, setNik] = useState('')
     const [obj, setObj] = useState<any>(null);
@@ -75,6 +75,7 @@ export default function Index() {
             toastUtil.useAlert('Berhasil mengirimkan jawaban', 'success')
             setDisabled(false)
             setDisabledText('Submit')
+            props.history.push('/')
         } catch (error: any) {
             toastUtil.useAlert(error.response.data.message || error.message)
             setDisabled(false)

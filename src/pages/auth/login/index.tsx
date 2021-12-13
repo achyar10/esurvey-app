@@ -10,7 +10,7 @@ import {
    CFormInput,
    CRow,
 } from '@coreui/react'
-import Logo from '../../../assets/brand/logo.png'
+import Logo from '../../../assets/brand/logo_sisuka.png'
 import { localStorageUtil, toastUtil } from '../../../utils'
 import { authService } from '../../../services'
 import { useAuthStore } from '../../../stores'
@@ -61,8 +61,8 @@ const Login = (props: any) => {
                         <CCardBody>
                            <CForm onSubmit={handleSubmit}>
                               <div className="text-center">
-                                 <img src={Logo} height={'50'} alt="logo" />
-                                 <span className="text-dark">&nbsp;&nbsp;&nbsp;&nbsp;B P I K E M E N D E S A</span>
+                                 <img src={Logo} height={'50'} alt="logo" /><br/>
+                                 <p className="fw-bold mt-3">"SISTEM INFORMASI SURVEY KEPUASAN LAYANAN"</p>
                               </div>
                               <h3>Sign In</h3>
                               <p className="text-medium-emphasis">Your account</p>

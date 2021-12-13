@@ -2,7 +2,7 @@ import { cilPlus, cilPencil, cilFilter } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 import { CRow, CCol, CCard, CCardBody, CSpinner, CTooltip, CButton, CModal, CModalBody, CModalFooter, CModalHeader, CFormLabel, CFormInput, CBadge, CFormSelect, CCollapse, CForm } from "@coreui/react"
 import { useEffect, useState } from "react";
-import { toastUtil } from "../../utils";
+import { dateUtil, toastUtil } from "../../utils";
 import Pagination from 'react-js-pagination'
 import { IRespondent } from "../../services/respondent";
 import { eduService, jobStatusService, jobTitleService, respondentService } from "../../services";
@@ -17,7 +17,6 @@ const Index = () => {
     const [data, setData] = useState<IRespondent[]>([]);
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(5);
-    const [totalPage, setTotalPage] = useState(0);
     const [totalDocs, setTotalDocs] = useState(0);
     const [isLoading, setLoading] = useState(false);
     const [update, setUpdate] = useState(false)
@@ -44,7 +43,6 @@ const Index = () => {
                 setPage(response[0].meta.page);
                 setLimit(response[0].meta.limit);
                 setTotalDocs(response[0].meta.totalDocs);
-                setTotalPage(response[0].meta.totalPages);
 
                 setEducation(response[1].data);
                 setJobTitles(response[2].data);
@@ -148,9 +146,11 @@ const Index = () => {
                                         <tr className="bg-light">
                                             <th>No</th>
                                             <th>NIK/NIP</th>
-                                            <th>Nama Respondent</th>
+                                            <th>Nama Responden</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Umur</th>
+                                            <th>Tanggal Buat</th>
+                                            <th>Tanggal Ubah</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
@@ -164,6 +164,8 @@ const Index = () => {
                                                     <td>{el.fullname}</td>
                                                     <td>{el.gender === 'male' ? 'Laki-laki' : 'Perempuan'}</td>
                                                     <td>{new Date().getFullYear() - el.birthyear} th</td>
+                                                    <td>{dateUtil.formatDateFull(el.created_at)}</td>
+                                                    <td>{dateUtil.formatDateFull(el.updated_at)}</td>
                                                     <td>{el.is_active ? (<CBadge color="success">Aktif</CBadge>) : (<CBadge color="danger">Tidak Aktif</CBadge>)}</td>
                                                     <td>
                                                         <CTooltip placement="top" content="Ubah">
@@ -184,7 +186,7 @@ const Index = () => {
                                     activePage={page}
                                     itemsCountPerPage={limit}
                                     totalItemsCount={totalDocs}
-                                    pageRangeDisplayed={totalPage}
+                                    pageRangeDisplayed={10}
                                     onChange={(page) => setPage(page)}
                                 />
                             </div>

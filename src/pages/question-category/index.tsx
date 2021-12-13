@@ -90,6 +90,7 @@ const Index = () => {
                                             <th>No</th>
                                             <th>Kode Unsur Pelayanan</th>
                                             <th>Nama Unsur Pelayanan</th>
+                                            <th>Tanggal Buat</th>
                                             <th>Tanggal Ubah</th>
                                             <th></th>
                                         </tr>
@@ -101,6 +102,7 @@ const Index = () => {
                                                     <td>{no++}</td>
                                                     <td>{el.code}</td>
                                                     <td>{el.name}</td>
+                                                    <td>{dateUtil.formatDateFull(el.created_at)}</td>
                                                     <td>{dateUtil.formatDateFull(el.updated_at)}</td>
                                                     <td>
                                                         <CTooltip placement="top" content="Ubah">
