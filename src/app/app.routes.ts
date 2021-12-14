@@ -42,6 +42,14 @@ const routes = [
         path: '/admin/questionnaire',
         component: lazy(() => import('../pages/questionnaire'))
     },
+    {
+        path: '/admin/reportquestionnaire',
+        component: lazy(() => import('../pages/reportquestionnaire'))
+    },
+    {
+        path: '/admin/reportsummary',
+        component: lazy(() => import('../pages/reportsummary'))
+    },
 ]
 
 export default routes

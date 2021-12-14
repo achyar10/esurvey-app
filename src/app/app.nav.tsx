@@ -1,7 +1,7 @@
 import CIcon from '@coreui/icons-react'
 import { 
   cilHome, cilFingerprint, cilEducation, cilBriefcase, cilSitemap, cilVoiceOverRecord,
-  cilListRich, cilTask, cilList,
+  cilListRich, cilTask, cilList, cilChartLine, cilBarChart,
  } from '@coreui/icons'
 import { CNavItem, CNavTitle } from '@coreui/react'
 
@@ -37,6 +37,22 @@ export const _navMasterData = [
     name: 'Periode Kuesioner',
     to: '/admin/questionnaire',
     icon: <CIcon icon={cilTask} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'Laporan',
+  },
+  {
+    component: CNavItem,
+    name: 'Kuesioner Responden',
+    to: '/admin/reportquestionnaire',
+    icon: <CIcon icon={cilChartLine} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Summary',
+    to: '/admin/reportsummary',
+    icon: <CIcon icon={cilBarChart} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,

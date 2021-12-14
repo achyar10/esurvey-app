@@ -38,6 +38,15 @@ export interface IDashboard {
     total_respondent_questionnaire: number;
 }
 
+export interface IRespondent {
+    id: number;
+    nik: string;
+    fullname: string;
+    suggestion: string;
+    is_questionnaire: boolean;
+    date: string;
+}
+
 export interface GetResultResponse extends BaseResponse {
     data: IResult;
 }
@@ -52,6 +61,10 @@ export interface GetResultChartResponse extends BaseResponse {
 
 export interface GetResultDashboardResponse extends BaseResponse {
     data: IDashboard;
+}
+
+export interface GetResultRespondentResponse extends BaseResponse {
+    data: IRespondent[];
 }
 
 
@@ -76,5 +89,10 @@ export const getChart = async (id: number): Promise<GetResultChartResponse> => {
 
 export const getDashboard = async (id: number): Promise<GetResultDashboardResponse> => {
     const response = await instance.get(`${url}/dashboard/${id}`);
+    return response.data;
+};
+
+export const getRespondent = async (id: number): Promise<GetResultRespondentResponse> => {
+    const response = await instance.get(`${url}/respondent/${id}`);
     return response.data;
 };
