@@ -2,7 +2,7 @@ import { CRow, CCol, CCard, CSpinner, CCardBody, CFormLabel, CFormSelect, CBadge
 import { useState, useEffect } from "react";
 import { resultService } from "../../services";
 import { IRespondent, IResultQuestionnaire } from "../../services/result";
-import { dateUtil, toastUtil } from "../../utils";
+import { toastUtil } from "../../utils";
 import ReactExport from 'react-data-export';
 import { cilSpreadsheet } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
@@ -109,7 +109,7 @@ export default function Index() {
                                                     <td>{el.nik}</td>
                                                     <td>{el.fullname}</td>
                                                     <td>{el.is_questionnaire ? (<CBadge color="success">Selesai</CBadge>) : (<CBadge color="danger">Belum Mengisi</CBadge>)}</td>
-                                                    <td>{el.date === '' ? '-' : dateUtil.formatDate(el.date)}</td>
+                                                    <td>{el.date === '' ? '-' : el.date}</td>
                                                     <td>{el.suggestion === '' ? '-' : el.suggestion}</td>
                                                 </tr>
                                             )
