@@ -21,7 +21,7 @@ export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve
 
 export const getEnv = () => {
     return ({
-        baseUrl: process.env.REACT_APP_BASE_URL || 'https://esurvey.achyar.my.id/api/',
+        baseUrl: process.env.REACT_APP_BASE_URL || 'https://esurvei.kemendesa.go.id/api/',
     });
 };
 
