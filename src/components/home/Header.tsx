@@ -15,15 +15,15 @@ export const Header = () => {
                         <img src={Logo} alt="logo" height="70" />
                     </div>
                     <h3 className="mb-2 mt-2 text-center">
-                        "SISTEM INFORMASI SURVEY KEPUASAN LAYANAN"
+                        "SISTEM INFORMASI SURVEI KEPUASAN LAYANAN"
                     </h3>
                     <p className="">Bantu kami mewujudkan <b>Wilayah
                         Bebas Korupsi</b> dan <b>Wilayah Birokrasi Bersih</b> dan Melayani melalui peningkatan kualitas pelayanan publik <br />
-                        Survey ini diselenggarakan dengan mengacu pada Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 14 Tahun 2017 tentang Pedoman Penyusunan Survei Kepuasan Masyarakat Unit Penyelenggara Pelayanan Publik.
+                        Survei ini diselenggarakan dengan mengacu pada Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 14 Tahun 2017 tentang Pedoman Penyusunan Survei Kepuasan Masyarakat Unit Penyelenggara Pelayanan Publik.
                     </p>
                 </div>
             </div>
-            <Link className="btn btn-primary text-white" to="/survey">Form Survey</Link>
+            <Link className="btn btn-primary text-white" to="/survey">Form Survei</Link>
             <Link className="btn btn-info text-white float-end" to="/">Hasil</Link>
             <hr />
         </>

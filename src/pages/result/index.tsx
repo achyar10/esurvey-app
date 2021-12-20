@@ -40,7 +40,7 @@ export default function Index() {
             <div className="container p-5">
                 <Header />
                 <div className="card">
-                    <h5 className="card-header">HASIL PENGOLAHAN SURVEY KEPUASAN MASYARAKAT</h5>
+                    <h5 className="card-header">HASIL PENGOLAHAN SURVEI KEPUASAN MASYARAKAT</h5>
                     <div className="card-body">
                         <div className="mb-3">
                             <CFormLabel>Periode Kuesioner <span className="text-danger">*</span></CFormLabel>

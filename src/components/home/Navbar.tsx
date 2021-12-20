@@ -7,7 +7,7 @@ export const Navbar = () => {
                 <div className="container-fluid">
                     <span className="navbar-brand">
                         <img src={Logo} height="50" alt="logo" />
-                        E-Survey BPI
+                        E-Survei BPI
                         </span>
                 </div>
             </nav>
