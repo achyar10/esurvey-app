@@ -45,8 +45,8 @@ const Index = () => {
                 setTotalDocs(response[0].meta.totalDocs);
 
                 setEducation(response[1].data);
-                setJobTitles(response[2].data);
-                setJobStatus(response[3].data);
+                setJobStatus(response[2].data);
+                setJobTitles(response[3].data);
                 setUpdate(false)
             } catch (error: any) {
                 toastUtil.useAlert(error.message)
